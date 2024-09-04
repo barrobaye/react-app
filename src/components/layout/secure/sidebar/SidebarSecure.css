@@ -1,0 +1,28 @@
+/* Sidebar Responsive Behavior */
+button[data-drawer-toggle="cta-button-sidebar"] {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    /* On smaller screens */
+    aside#cta-button-sidebar {
+        transform: translateX(-100%);
+    }
+
+    .content {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    button[data-drawer-toggle="cta-button-sidebar"] {
+        display: block;
+    }
+
+    .overlay {
+        display: block;
+    }
+
+    aside#cta-button-sidebar.active {
+        transform: translateX(0);
+    }
+}

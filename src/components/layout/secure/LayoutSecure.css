@@ -1,0 +1,110 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
+}
+
+#root {
+    display: flex;
+    height: 100%;
+}
+
+/* Sidebar Styles */
+aside#cta-button-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 240px;
+    height: 100%;
+    background-color: #1F2937; /* Dark gray */
+    color: #fff;
+    transition: transform 0.3s ease;
+    z-index: 100;
+}
+
+/* Main Content */
+.content {
+    margin-left: 240px; /* Sidebar width */
+    width: calc(100% - 240px);
+    height: 100%;
+    background-color: #F3F4F6; /* Light gray */
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Overlay */
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 99;
+}
+
+/* Header */
+header {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    background-color: #FFFFFF;
+    padding: 10px 20px;
+    z-index: 101;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.content > div {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 20px;
+}
+
+/* Example: List/Grid Display */
+.list-block {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.list-block > div {
+    flex: 1 1 calc(50% - 20px); /* Two items per row with gap */
+    background-color: #FFFFFF;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+/* Adjustments for Smaller Screens */
+@media (max-width: 480px) {
+    /* Header */
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    header form {
+        width: 100%;
+        margin: 0;
+    }
+
+    header input[type="text"] {
+        width: 100%;
+    }
+
+    /* Sidebar */
+    aside#cta-button-sidebar {
+        width: 200px;
+    }
+
+    .content {
+        margin-left: 200px;
+        width: calc(100% - 200px);
+    }
+
+    .list-block > div {
+        flex: 1 1 100%; /* Single column on small screens */
+    }
+}
