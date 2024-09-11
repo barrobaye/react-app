@@ -5,9 +5,6 @@ import "./SidebarSecure.css";
 export default function SidebarSecure(){
     return (
         <div className="" >
-        
-      
-        
         <aside id="cta-button-sidebar" className="fixed top-0 left-0 z-40 w-64 h-screen  transition-transform -translate-x-full sm:translate-x-0"  aria-label="Sidebar">
            <div className="h-full px-3 py-4 overflow-y-auto bg-gradient-to-t from-cyan-700 to-cyan-900 dark:bg-gray-800"> 
            <div className="pb-0 h-32 mt-2 sm:mx-auto sm:w-full sm:max-w-sm">
@@ -37,7 +34,8 @@ export default function SidebarSecure(){
                  </NavLink>
                  <NavLink to="/boutique/client" >
                  <li>
-                    <a href="#" className="flex items-center p-2 text-white rounded-lg dark:text-white hover:bg-gray-100 hover:text-black dark:hover:bg-gray-700 group">
+                      <a href="#" className="flex items-center p-2 text-white rounded-lg dark:text-white hover:bg-gray-100 hover:text-black dark:hover:bg-gray-700 group"> 
+                      <i className="fa-solid fa-users"></i>
                        <span className="flex-1 ms-3 whitespace-nowrap">Clients</span>
                        <span className="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">3</span>
                     </a>
@@ -45,7 +43,8 @@ export default function SidebarSecure(){
                  </NavLink>
                  <NavLink to="/boutique/dette" >
                  <li>
-                    <a href="#" className="flex items-center p-2 text-white rounded-lg dark:text-white hover:bg-gray-100 hover:text-black dark:hover:bg-gray-700 group">  
+                    <a href="#" className="flex items-center p-2 text-white rounded-lg dark:text-white hover:bg-gray-100 hover:text-black dark:hover:bg-gray-700 group">    
+                        <i className="fa-solid fa-hand-holding-dollar"></i>
                        <span className="flex-1 ms-3 whitespace-nowrap">Dettes</span>
                     </a>
                  </li>

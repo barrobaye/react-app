@@ -1,0 +1,12 @@
+.newDet{
+    width: 48%;
+}
+.suiDet{
+    width: 50%;
+}
+.myrow{ 
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    height: auto;
+}

@@ -1,21 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Client } from '../../model/Client';
 import ClientService from '../../services/clients/ClientService';
+import ClientModal from '../../components/layout/public/ModalComponent';
+import { Client } from '../../model/Client';
 
-
-const ClientPage = () => {
+const ClientPage: React.FC = () => {
   const [clients, setClients] = useState<Client[]>([]);
-  const [showModal, setShowModal] = useState<boolean>(false);
-  const [createAccount, setCreateAccount] = useState<boolean>(false);
-  const [formData, setFormData] = useState({
-    nom: '',
-    prenom: '',
-    telephone: '',
-    adresse: '',
-    photo: null as File | null,
-    login: '',
-    password: ''
-  });
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchClients = async () => {
@@ -30,236 +20,84 @@ const ClientPage = () => {
     fetchClients();
   }, []);
 
-  const handleEdit = (client: Client) => {
-    console.log('Edit client:', client);
+  const toggleModal = () => {
+    setIsModalOpen((prev) => !prev);
   };
 
-  const toggleAccountFields = () => {
-    setCreateAccount(!createAccount);
-  };
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value
-    });
-  };
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files ? e.target.files[0] : null;
-    setFormData({
-      ...formData,
-      photo: file
-    });
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    // Handle form submission logic
+  const handleClientAdded = (newClient: Client) => {
+    setClients((prevClients) => [...prevClients, newClient]);
   };
 
   return (
-    <div>
-      <div
-        id="clientModal"
-        tabIndex={-1}
-        className={`overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full justify-center items-center flex ${showModal ? '' : 'hidden'}`}
-        aria-modal="true"
-        role="dialog"
-      >
-        <div className="relative w-full max-w-[95%] sm:max-w-2xl h-full md:h-auto">
-          <div className="relative bg-white rounded-lg shadow pt-10 px-4 pb-4 w-full max-w-[95%] sm:max-w-2xl mx-auto">
-            <button
-              type="button"
-              className="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center"
-              onClick={() => setShowModal(false)}
-            >
-              <svg
-                aria-hidden="true"
-                className="w-5 h-5"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 011.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                  clipRule="evenodd"
-                ></path>
-              </svg>
-            </button>
-            <h3 className="mb-4 text-lg font-normal text-gray-500">N. UTILISATEUR</h3>
-            <div className="p-6 text-center border rounded-xl">
-              <form
-                method="POST"
-                action="#"
-                encType="multipart/form-data"
-                className="space-y-6"
-                onSubmit={handleSubmit}
-              >
-                <div className="form-row flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-2 mb-4">
-                  <label
-                    htmlFor="nom"
-                    className="w-full sm:w-1/4 font-semibold text-gray-700 flex items-center"
-                  >
-                    <i className="fas fa-user mr-2"></i>Nom
-                  </label>
-                  <input
-                    type="text"
-                    id="nom"
-                    name="nom"
-                    value={formData.nom}
-                    className="input-shadow w-full sm:flex-grow p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
-                    onChange={handleInputChange}
-                  />
-                </div>
-                <div className="form-row flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-2 mb-4">
-                  <label
-                    htmlFor="prenom"
-                    className="w-full sm:w-1/4 font-semibold text-gray-700 flex items-center"
-                  >
-                    <i className="fas fa-user mr-2"></i>Prénom
-                  </label>
-                  <input
-                    type="text"
-                    id="prenom"
-                    name="prenom"
-                    value={formData.prenom}
-                    className="input-shadow w-full sm:flex-grow p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
-                    onChange={handleInputChange}
-                  />
-                </div>
-                <div className="form-row flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-2 mb-4">
-                  <label
-                    htmlFor="telephone"
-                    className="w-full sm:w-1/4 font-semibold text-gray-700 flex items-center"
-                  >
-                    <i className="fas fa-phone mr-2"></i>Téléphone
-                  </label>
-                  <input
-                    type="tel"
-                    id="telephone"
-                    name="telephone"
-                    value={formData.telephone}
-                    className="input-shadow w-full sm:flex-grow p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
-                    onChange={handleInputChange}
-                  />
-                </div>
-                <div className="form-row flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-2 mb-4">
-                  <label
-                    htmlFor="adresse"
-                    className="w-full sm:w-1/4 font-semibold text-gray-700 flex items-center"
-                  >
-                    <i className="fas fa-map-marker-alt mr-2"></i>Adresse
-                  </label>
-                  <input
-                    type="text"
-                    id="adresse"
-                    name="adresse"
-                    value={formData.adresse}
-                    className="input-shadow w-full sm:flex-grow p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
-                    onChange={handleInputChange}
-                  />
-                </div>
-                <div className="form-row flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-2 mb-4">
-                  <label
-                    htmlFor="photo"
-                    className="w-full sm:w-1/4 font-semibold text-gray-700 flex items-center"
-                  >
-                    <i className="fas fa-camera mr-2"></i>Photo
-                  </label>
-                  <input
-  type="file"
-  id="photo"
-  name="photo"
-  className="input-shadow w-full sm:flex-grow p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
-  onChange={handleFileChange}
-/>
-                </div>
-
-                {/* Toggle pour Création de Compte */}
-                <div className="flex items-center justify-start gap-2">
-                  <span className="font-semibold text-gray-700">Créer un compte :</span>
-                  <div className="flex items-center">
-                    <label className="toggle-switch">
-                      <input
-                        type="checkbox"
-                        id="creerCompte"
-                        className="sr-only"
-                        onChange={toggleAccountFields}
-                      />
-                      <span className="slider"></span>
-                    </label>
-                    <span className="ml-2 text-gray-700 font-semibold" id="toggleLabel">
-                      {createAccount ? 'Oui' : 'Non'}
-                    </span>
-                  </div>
-                </div>
-
-                {/* Champs Supplémentaires pour la Création de Compte */}
-                {createAccount && (
-                  <div id="accountFields" className="space-y-6 mt-4">
-                    {/* Champ Login */}
-                    <div className="form-row flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-2 mb-4">
-                      <label
-                        htmlFor="login"
-                        className="w-full sm:w-1/4 font-semibold text-gray-700 flex items-center"
-                      >
-                        <i className="fas fa-envelope mr-2"></i>Login
-                      </label>
-                      <input
-                        type="text"
-                        id="login"
-                        name="login"
-                        value={formData.login}
-                        className="input-shadow w-full sm:flex-grow p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
-                        onChange={handleInputChange}
-                      />
-                    </div>
-
-                    {/* Champ Password */}
-                    <div className="form-row flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-2 mb-4">
-                      <label
-                        htmlFor="password"
-                        className="w-full sm:w-1/4 font-semibold text-gray-700 flex items-center"
-                      >
-                        <i className="fas fa-lock mr-2"></i>Password
-                      </label>
-                      <input
-                        type="password"
-                        id="password"
-                        name="password"
-                        value={formData.password}
-                        className="input-shadow w-full sm:flex-grow p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
-                        onChange={handleInputChange}
-                      />
-                    </div>
-                  </div>
-                )}
-
-                <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6">
-                  <button
-                    type="reset"
-                    className="w-full sm:w-auto bg-red-600 text-white font-bold py-2 px-4 rounded-md hover:bg-red-700 flex items-center justify-center"
-                  >
-                    <i className="fas fa-times mr-2"></i>Annuler
-                  </button>
-                  <button
-                    type="submit"
-                    className="w-full sm:w-auto bg-blue-600 text-white font-bold py-2 px-4 rounded-md hover:bg-blue-700 flex items-center justify-center"
-                  >
-                    <i className="fas fa-save mr-2"></i>Enregistrer
-                  </button>
-                </div>
-              </form>
+    <main className="mt-8 mx-4 md:mr-8 rounded-xl bg-white p-4 shadow-sm flex flex-col main-content">
+      <div className="product-lists">
+        <div className="product-list bg-white rounded-lg shadow p-4 w-full">
+          <div className="mb-4 text-xl font-bold text-black">Lister Clients</div>
+          <div className="flex flex-wrap justify-between items-center mb-4">
+            <div className="flex items-center space-x-2">
+              <input
+                type="text"
+                placeholder="Filtrer par Telephone"
+                className="p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none w-1/2"
+              />
+              <button className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
+                OK
+              </button>
             </div>
+            <div className="flex gap-4">
+              <button
+                onClick={toggleModal}
+                className="px-4 py-2 bg-blue-600 text-white rounded-md shadow hover:bg-blue-700 mt-2 sm:mt-0"
+              >
+                Nouvelle Client
+              </button>
+            </div>
+          </div>
+          <div className="overflow-x-auto">
+            <table className="min-w-full">
+              <thead className="bg-blue-600 text-white">
+                <tr>
+                  <th className="px-6 py-3 text-left">PRENOM ET NOM</th>
+                  <th className="px-6 py-3 text-left">TELEPHONE</th>
+                  <th className="px-6 py-3 text-left">ADRESSE</th>
+                  {/* <th className="px-6 py-3 text-left">MONTANT DUE</th> */}
+                  <th className="px-6 py-3 text-left">ACTION</th>
+                </tr>
+              </thead>
+              <tbody className="text-gray-700">
+                {clients.map((client) => (
+                  <tr key={client.id} className="border-t">
+                    <td className="px-6 py-4">{client.prenom} {client.nom}</td>
+                    <td className="px-6 py-4">{client.telephone}</td>
+                    <td className="px-6 py-4">{client.adresse}</td>
+                    {/* <td className="px-6 py-4">{client.montantDue}</td> */}
+                    <td className="px-6 py-4">
+                      <a href={`../boutiquier/dette?id=${client.id}`}>
+                        <button className="px-4 py-2 bg-blue-500 text-white rounded-md shadow hover:bg-blue-600">
+                          Détails
+                        </button>
+                      </a>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
 
-      {/* Clients Table */}
-      <div className="p-6">
+      <ClientModal
+        isOpen={isModalOpen}
+        toggleModal={toggleModal}
+        onClientAdded={handleClientAdded}
+      />
+    </main>
+  );
+};
+
+export default ClientPage;
+
+      {/* <div className="p-6">
         <h2 className="text-2xl font-bold mb-4">Clients</h2>
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-50">
@@ -288,9 +126,7 @@ const ClientPage = () => {
             ))}
           </tbody>
         </table>
-      </div>
+      </div> 
     </div>
-  );
-};
+    */}
 
-export default ClientPage;

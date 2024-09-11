@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import "./LoginPage.css";
-import AuthService, { CredentialsOrNull } from '../../services/AuthService';
+import AuthService, { CredentialsOrNull } from '../../services/auth/AuthService';
 
 // Define the interface for form data
 interface FormData {
@@ -33,7 +33,7 @@ const LoginPage = () => {
   
         console.log("Login successful:", token);
         AuthService.saveToken(token);
-        navigate("/boutique", { replace: true });
+        navigate("/boutique/dashboard", { replace: true });
       })
       .catch((error) => {
         console.error("Login failed:", error.message || error);

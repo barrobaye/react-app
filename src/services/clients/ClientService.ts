@@ -33,22 +33,25 @@ class ClientService {
   }
 
   // Function to create a new client
-  public static async createClient(clientData: Client): Promise<RestResponse<Client>> {
+  public static async createClient(clientData: Client): Promise<Client> {
     try {
       const formData = new FormData();
       Object.entries(clientData).forEach(([key, value]) => {
         if (typeof value === 'string' || value instanceof Blob) {
-          this.appendToFormData(formData, key, value);
+          formData.append(key, value);
         }
       });
-
+  
+      // Make API request
       const response = await apiClient.post<RestResponse<Client>>('/clients', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
-
-      return response.data;
+  
+      // Extract client data from response
+      const newClient = response.data.data; // Adjust based on your API response structure
+      return newClient;
     } catch (error) {
       console.error('Failed to create client:', error);
       throw new Error('Failed to create client');

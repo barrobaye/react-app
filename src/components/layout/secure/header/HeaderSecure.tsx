@@ -5,8 +5,8 @@ export default function HeaderSecure(){
     return(
        
 
-<header className="bg-gray-50 dark:bg-gray-900  flex items-center">
-  <div className="max-w-screen-xl px-4 mx-auto lg:px-8 w-full">
+<header className=" flex flex-row-reverse bg-gray-50 dark:bg-gray-900  ">
+  <div className=" max-w-screen-xl px-4 mx-auto lg:px-8 w-full">
     {/* <!-- Start coding here --> */}
     <div className="relative bg-white shadow-md dark:bg-gray-800 sm:rounded-lg">
       <div className="flex flex-col items-center justify-between p-4 space-y-3 md:flex-row md:space-y-0 md:space-x-4">

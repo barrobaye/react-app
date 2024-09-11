@@ -24,15 +24,6 @@ aside#cta-button-sidebar {
 }
 
 /* Main Content */
-.content {
-    margin-left: 240px; /* Sidebar width */
-    width: calc(100% - 240px);
-    height: 100%;
-    background-color: #F3F4F6; /* Light gray */
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-}
 
 /* Overlay */
 .overlay {
@@ -50,17 +41,18 @@ aside#cta-button-sidebar {
 header {
     position: sticky;
     top: 0;
-    width: 100%;
+    width: 90%;
     background-color: #FFFFFF;
     padding: 10px 20px;
-    z-index: 101;
+  
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
-.content > div {
-    display: flex;
-    flex-direction: column;
+.content  {
+    width: auto;
+    margin-left: 259px;
     flex: 1;
-    padding: 20px;
+    padding: 7px;
+    height: auto;
 }
 
 /* Example: List/Grid Display */
