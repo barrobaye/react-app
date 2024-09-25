@@ -12,7 +12,6 @@ import "./LayoutSecure.css";
                     <div className="overlay" id="overlay"></div>
                     <div className="content">
                             <HeaderSecure/>
-
                            <Outlet/>
                     </div>
                 

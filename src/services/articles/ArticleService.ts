@@ -22,15 +22,17 @@ export const ArticleService = {
     }
   },
 
-  async updateArticle(id: number, article: Omit<Article, 'id'>): Promise<Article> {
+  async updateArticles(articles: { id: number; data: { quantiteStock: number } }[]) {
     try {
-      const response = await apiClient.put<RestResponse<Article>>(`/article/${id}`, article);
-      return response.data.data;
+        const response = await apiClient.put(`/article/${articles[0].id}`, articles);
+        console.log("Updated articles:", response.data);
+        return response.data;
     } catch (error) {
-      console.error("Erreur lors de la mise à jour de l'article:", error);
-      throw error;
+        console.error("Error updating articles:", error);
+        throw error;
     }
-  },
+},
+ 
 
   async deleteArticle(id: number): Promise<void> {
     try {
