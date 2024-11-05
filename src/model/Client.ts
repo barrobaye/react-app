@@ -1,5 +1,5 @@
 export interface Client {
-  id?: string; // Make id optional
+  id?: number; // Make id optional
   nom: string;
   prenom: string;
   telephone: string;

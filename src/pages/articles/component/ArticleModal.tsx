@@ -6,7 +6,7 @@ import { Categorie } from "../../../model/Categorie";
 
 interface ArticleModalProps {
   isOpen: boolean;
-  toggleModal: () => void; 
+  toggleModal: () => void;
   onArticleAdded: (newArticle: Article) => void;
 }
 
@@ -19,7 +19,7 @@ const ArticleModal: React.FC<ArticleModalProps> = ({
     libelle: "",
     prix: 0,
     quantiteStock: 0,
-    categorie: 2, // Valeur par défaut, changez-la si nécessaire
+    categoriId: 0, // Corrected: Using 'categoriId'
   });
 
   const [categories, setCategories] = useState<Categorie[]>([]); 
@@ -30,12 +30,20 @@ const ArticleModal: React.FC<ArticleModalProps> = ({
       try {
         const categorieData = await CategorieService.getAllCategorie();
         setCategories(categorieData);
+  
+        // Ensure a valid category ID is set
+        if (categorieData.length > 0) {
+          setFormData((prev) => ({
+            ...prev,
+            categoriId: categorieData[0]?.id ?? 0, // Corrected: Use 'categoriId'
+          }));
+        }
       } catch (error) {
         console.error(error);
         setError("Erreur lors de la récupération des catégories.");
       }
     };
-
+  
     fetchCategories();
   }, []);
 
@@ -52,10 +60,16 @@ const ArticleModal: React.FC<ArticleModalProps> = ({
     try {
       const newArticle = await ArticleService.addArticle(formData);
       onArticleAdded(newArticle);
-      setFormData({ libelle: "", prix: 0, quantiteStock: 0, categorie: 4 }); // Réinitialiser les champs
-      toggleModal(); // Fermez le modal après soumission
+      setFormData({
+        libelle: "",
+        prix: 0,
+        quantiteStock: 0,
+        categoriId: categories[0]?.id || 0, // Reset with default category ID
+      });
+      toggleModal(); // Close modal after submission
     } catch (error) {
       console.error("Échec de l'ajout de l'article :", error);
+      setError("Échec de l'ajout de l'article. Veuillez vérifier les informations et réessayer.");
     }
   };
 
@@ -112,19 +126,19 @@ const ArticleModal: React.FC<ArticleModalProps> = ({
               />
             </div>
             <div className="mb-4">
-              <label htmlFor="categorie" className="block font-semibold text-gray-700 mb-1">
+              <label htmlFor="categoriId" className="block font-semibold text-gray-700 mb-1">
                 Categorie:
               </label>
               <select
-                id="categorie"
-                name="categorie"
-                value={formData.categorie}
+                id="categoriId"
+                name="categoriId" // Corrected: Use 'categoriId'
+                value={formData.categoriId}
                 onChange={handleInputChange}
                 className="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
               >
                 {categories.map((categorie) => (
                   <option key={categorie.id} value={categorie.id}>
-                    {categorie.libelle} 
+                    {categorie.libelle}
                   </option>
                 ))}
               </select>
@@ -132,7 +146,7 @@ const ArticleModal: React.FC<ArticleModalProps> = ({
             <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">
               Sauvegarder
             </button>
-            {error && <p className="text-red-500">{error}</p>} {/* Affichez l'erreur, si nécessaire */}
+            {error && <p className="text-red-500">{error}</p>} {/* Display the error if necessary */}
           </form>
         </div>
       </div>

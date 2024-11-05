@@ -3,7 +3,7 @@ export interface Article {
   libelle: string;
   prix: number;
   quantiteStock: number; 
-  categorie: number;
+  categoriId: number;
   createdAt?: string;
   updatedAt?: string;
 }

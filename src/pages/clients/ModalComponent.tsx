@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import ClientService from '../../../services/clients/ClientService';
-import { Client } from '../../../model/Client';
+import ClientService from '../../services/clients/ClientService';
+import { Client } from '../../model/Client';
 
 // Define the props type for ClientModal
 

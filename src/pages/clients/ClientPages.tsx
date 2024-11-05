@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ClientService from '../../services/clients/ClientService';
-import ClientModal from '../../components/layout/public/ModalComponent';
+import ClientModal from './ModalComponent';
 import { Client } from '../../model/Client';
 
 const ClientPage: React.FC = () => {
@@ -65,22 +65,23 @@ const ClientPage: React.FC = () => {
                 </tr>
               </thead>
               <tbody className="text-gray-700">
-                {clients.map((client) => (
-                  <tr key={client.id} className="border-t">
-                    <td className="px-6 py-4">{client.prenom} {client.nom}</td>
-                    <td className="px-6 py-4">{client.telephone}</td>
-                    <td className="px-6 py-4">{client.adresse}</td>
-                    {/* <td className="px-6 py-4">{client.montantDue}</td> */}
-                    <td className="px-6 py-4">
-                      <a href={`../boutiquier/dette?id=${client.id}`}>
-                        <button className="px-4 py-2 bg-blue-500 text-white rounded-md shadow hover:bg-blue-600">
-                          Détails
-                        </button>
-                      </a>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
+  {clients.map((client) => (
+    <tr key={client.id} className="border-t">
+      <td className="px-6 py-4">
+        {client.prenom} {client.nom}
+      </td>
+      <td className="px-6 py-4">{client.telephone}</td>
+      <td className="px-6 py-4">{client.adresse}</td>
+      <td className="px-6 py-4">
+        <a href={`../boutiquier/dette?id=${client.id}`}>
+          <button className="px-4 py-2 bg-blue-500 text-white rounded-md shadow hover:bg-blue-600">
+            Détails
+          </button>
+        </a>
+      </td>
+    </tr>
+  ))}
+</tbody>
             </table>
           </div>
         </div>
