@@ -1,7 +1,8 @@
+
 header form {
     display: flex;
     align-items: center;
-    max-width: 300px;
+    max-width: 400px;
     margin-left: auto;
 }
 
@@ -16,10 +17,10 @@ header input[type="text"] {
 header input[type="text"]:focus {
     border-color: #3B82F6; /* Primary color on focus */
 }
-eader form {
+header form {
     display: flex;
     align-items: center;
-    max-width: 300px;
+    max-width: 400px;
     margin-left: auto;
 }
 
@@ -33,4 +34,11 @@ header input[type="text"] {
 
 header input[type="text"]:focus {
     border-color: #3B82F6; /* Primary color on focus */
+}
+.blocleft{
+    width: 600px;
+
+}
+.blocright{
+    width: 400px;
 }

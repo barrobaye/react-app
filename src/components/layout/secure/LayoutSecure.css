@@ -41,17 +41,17 @@ aside#cta-button-sidebar {
 header {
     position: sticky;
     top: 0;
-    width: 90%;
+    width: 100%;
     background-color: #FFFFFF;
     padding: 10px 20px;
-  
+    margin:0px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
-.content  {
+.content {
     width: auto;
-    margin-left: 259px;
+    margin-left: 230px;
     flex: 1;
-    padding: 7px;
+    padding: 1px;
     height: auto;
 }
 
