@@ -48,11 +48,12 @@ header {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 .content {
-    width: auto;
+    width: 1670px;
     margin-left: 230px;
     flex: 1;
     padding: 1px;
     height: auto;
+    background-color: rgba(178, 205, 249, 0.399);
 }
 
 /* Example: List/Grid Display */

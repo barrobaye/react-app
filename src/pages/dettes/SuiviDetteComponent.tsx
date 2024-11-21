@@ -2,7 +2,7 @@ import "./DettePages.css";
 
 const SuiviDette = ( ) =>{
     return(
-        <div className="bg-white rounded-lg shadow-md p-4 sm:p-6">
+      <div className="bg-white rounded-lg shadow-md p-4 sm:p-6" style={{ width: "740px" }}>
   <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-blue-800">
     <i className="fas fa-search-dollar mr-2"></i>Suivi de Dette
   </h2>

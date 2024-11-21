@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Article } from '../../model/Article';
 import ArticleModal from './component/ArticleModal';
 import { ArticleService } from '../../services/articles/ArticleService';

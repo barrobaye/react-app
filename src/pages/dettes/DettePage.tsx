@@ -9,7 +9,7 @@ const DettePage = () =>{
       setCreateAccount(!createAccount);
     };
     return (     
-<div className="myrow ">
+<div className="myrow  flex-1">
       {/* Nouveau Client Section */}
       <div className="newDet bg-white rounded-lg shadow-md p-6 w-50">
         <h2 className="text-2xl font-bold mb-6 text-blue-800">
@@ -19,8 +19,7 @@ const DettePage = () =>{
           <div className="form-row mb-4 flex items-center space-x-2">
             <label
               htmlFor="prenom"
-              className="w-full sm:w-1/6 flex-shrink-0 font-semibold text-gray-700 flex items-center"
-            >
+              className="w-full sm:w-1/6 flex-shrink-0 font-semibold text-gray-700 flex items-center">
               <i className="fas fa-user mr-2"></i>Prénom
             </label>
             <input

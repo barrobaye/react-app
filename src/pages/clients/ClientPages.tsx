@@ -3,7 +3,7 @@ import ClientService from '../../services/clients/ClientService';
 import ClientModal from './ModalComponent';
 import { Client } from '../../model/Client';
 
-const ClientPage: React.FC = () => {
+const ClientPage= () => {
   const [clients, setClients] = useState<Client[]>([]);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
